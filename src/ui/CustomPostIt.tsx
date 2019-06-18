@@ -55,7 +55,7 @@ export class CustomPostIt extends React.Component<CustomPostItProps, CustomPostI
             right: 5,
             top:itemY,
             border: "1px solid gray",
-            background: "green",
+            background: "yellow",
             boxSizing: "border-box",
             display: item && item.payload && item.payload.hidden?"none":undefined,
             visibility: (-1===itemH?"hidden":"visible"),

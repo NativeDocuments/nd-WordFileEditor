@@ -25,9 +25,10 @@ function createPostIt(item, sidebar, pos, doc) {
 }
 
 NDAPI.app("root", {
-    revid: queryArgs.revid || appArgs.revid || process.env.ND_API_VER || NDAPI.inferRevId,
-    devid: queryArgs.devid || appArgs.devid || process.env.ND_DEV_ID || NDAPI.inferDevId,
-    nid: queryArgs.nid || appArgs.nid,
+    revid: queryArgs.revid || appArgs.revid || process.env.ND_API_VER,
+    devid: queryArgs.devid || appArgs.devid || process.env.ND_DEV_ID,
+    tenantid: queryArgs.tenantid || appArgs.tenantid || process.env.ND_TENANT_ID,
+    nid: queryArgs.nid || appArgs.nid || (queryArgs.url?{url:queryArgs.url}:undefined),
     author: queryArgs.author || appArgs.author,
     headerHidden: true,
     onDocumentLoaded: function (e) {
@@ -89,9 +90,14 @@ NDAPI.app("root", {
     },
     onSelectionChanged: function(event) {
         console.log("onSelectionChanged "+JSON.stringify(event));
-        NDAPI.getStyle(event.rStyle, function(styleData) {
-            console.log("onSelectionChanged:styleData "+JSON.stringify(styleData));
-        });
+        if (true) {
+            NDAPI.getStyle(event.rStyle, function(styleData) {
+                console.log("onSelectionChanged:styleData "+JSON.stringify(styleData));
+            });
+            NDAPI.getStyle(event.pStyle, function(styleData) {
+                console.log("onSelectionChanged:styleData "+JSON.stringify(styleData));
+            });
+        }
     },
     renderOverlayLayer: function (renderedOverlayLayer) {
         const showZoomDialog=true;
@@ -162,13 +168,7 @@ NDAPI.app("root", {
         return renderedRoot;
     },
     onKeyDown: function(event) {
-        if (false && (event.metaKey || event.ctrlKey) && ("z"===event.key || "Z"===event.key || "y"===event.key || "Y"===event.key)) { // Ctrl+Z, Ctrl+Y
-            console.log("event");
-            PopupCanvas.show(React.createElement("div", {}, "HELLO"));
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     },
     onKeyUp: function(event) {
         return false;

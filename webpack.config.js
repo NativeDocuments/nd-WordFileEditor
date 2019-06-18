@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -42,6 +42,14 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+        hash: false,
+        template: './host/host.html',
+        filename: 'index.html',
+        chunks: []
+    })
+  ],
   "externals": {
     "NDAPI": "window.ndapi",
     "react": "window.ndapi.exports.React",

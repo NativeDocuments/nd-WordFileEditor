@@ -18,7 +18,7 @@ function uploadDocument(file:File) {
     xhr.withCredentials=false;
     xhr.open("POST", sessionURL + "/upload", true);
     xhr.setRequestHeader("Content-type", file.type);
-    if (ND_DEV_SECRET) {
+    if (ND_DEV_SECRET && ND_DEV_SECRET.length>0) {
         xhr.setRequestHeader("X-ND-DEV-SECRET", ND_DEV_SECRET);
     }
     xhr.setRequestHeader("X-ND-AUTHOR", JSON.stringify({name: "WordFileEditor Demo"}));
