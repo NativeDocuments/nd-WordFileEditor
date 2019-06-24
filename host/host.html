@@ -3,7 +3,17 @@
     <script src="host.js"></script>
 </head>
 <body style="border:0; margin:0; padding:0;width: 100%;height: 100%;">
-<div style="text-align: center;height: 22px; line-height: 22px; white-space: nowrap;background-color: blue; color: white;font-size: 8pt;font-family: Arial, Helvetica, sans-serif"><form onsubmit="event.preventDefault();">WordFileEditor Demo: Select or drag &amp; drop a Microsoft Word Document: <input id="upload" type="file" style="font-family: inherit; font-size: inherit"></input></form></div>
+<div id="header" style="text-align: center;height: 22px; line-height: 22px; white-space: nowrap;background-color: blue; color: white;font-size: 8pt;font-family: Arial, Helvetica, sans-serif"><form onsubmit="event.preventDefault();">WordFileEditor Demo: Select or drag &amp; drop a Microsoft Word Document: <input id="upload" type="file" style="font-family: inherit; font-size: inherit"></input></form></div>
+<form onsubmit="event.preventDefault();" id="login" style="display: none; width:480px;height:200px;margin-left: -240px;margin-top: -100px; position: absolute;left:50%;top:50%;bottom: auto;border:1px solid black">
+    <div style="position: absolute; top: 0px; width: 100%;text-align: center">Credentials</div>
+    <div style="position: absolute; top: 20px; width: 100%;text-align: center">Get credentials from <a target="_blank" href="https://developers.nativedocuments.com">https://developers.nativedocuments.com</a></div>
+    <div style="box-sizing: border-box; position: absolute; left:20px; top: 60px; width: 40%;text-align: left;">DEV-ID:</div>
+    <input name="ND_DEV_ID" id="ND_DEV_ID" type="text" style="box-sizing: border-box; position: absolute; right:20px; top: 60px; width: 60%;">
+    <div style="box-sizing: border-box; position: absolute; left:20px;top: 90px; width: 40%;text-align: left;">DEV-SECRET:</div>
+    <input name="ND_DEV_SECRET" id="ND_DEV_SECRET" type="password" style="box-sizing: border-box; position: absolute; right:20px; top: 90px; width: 60%;">
+    <div id="loginStatus" style="box-sizing: border-box; position: absolute; left:0px;bottom: 55px; width: 100%;text-align: center;color: red"></div>
+    <input type="submit" value="Validate" style="box-sizing: border-box; position: absolute; left:50%; width: 80px; margin-left: -40px; bottom: 20px;">
+</form>
 <iframe id="wfe" style="display: none; height:calc( 100% - 22px );width: 100%; background: white;border:0;padding: 0;margin: 0" src="about:blank"></iframe>
 <div id="error" style="display:none; position: absolute; bottom:0px; left:0px; right:0px; height:22px;line-height: 22px; white-space: nowrap;background-color: red; color: white;font-size: 8pt;font-family: Arial, Helvetica, sans-serif"></div>
 </body>
