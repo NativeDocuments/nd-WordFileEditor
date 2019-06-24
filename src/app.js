@@ -26,7 +26,7 @@ function createPostIt(item, sidebar, pos, doc) {
 
 NDAPI.app("root", {
     revid: queryArgs.revid || appArgs.revid || process.env.ND_API_VER,
-    devid: queryArgs.devid || appArgs.devid || process.env.ND_DEV_ID,
+    devid: queryArgs.devid || appArgs.devid || (process.env.ND_DEV_ID && "string"===typeof(process.env.ND_DEV_ID) && process.env.ND_DEV_ID.length>0?process.env.ND_DEV_ID:null) || localStorage.getItem("ND_DEV_ID") || null,
     tenantid: queryArgs.tenantid || appArgs.tenantid || process.env.ND_TENANT_ID,
     nid: queryArgs.nid || appArgs.nid || (queryArgs.url?{url:queryArgs.url}:undefined),
     author: queryArgs.author || appArgs.author,

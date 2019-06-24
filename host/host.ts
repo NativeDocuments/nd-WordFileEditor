@@ -1,6 +1,6 @@
 const ND_DEV_ID=process.env.ND_DEV_ID || "";
 const ND_DEV_SECRET=process.env.ND_DEV_SECRET || "";
-const ND_API_VER=process.env.ND_API_VER;
+const ND_API_VER=process.env.ND_API_VER || "DEV";
 const ND_SERVICE_URL=""; // process.env.ND_SERVICE_URL || "";
 const CUSTOM_APP = btoa(ND_SERVICE_URL + "/" + ND_API_VER + "/custom/app.js"); 
 // use ("/"+ND_API_VER+"B") in below to avoid redirect in nd webapp from https to http

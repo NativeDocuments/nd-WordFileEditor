@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // "trace": "verbose", // if debugging fails this can give a hint
+            "name": "Launch Chrome against localhost, with sourcemaps",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://127.0.0.1:8888/",
+            "sourceMaps": true,
+            "webRoot": "${webroot}/plugin",
+            //"runtimeExecutable": "[PATH-TO-CHOME]/chrome.exe", // change this for a different chrome 
+            "runtimeArgs": ["--user-data-dir=${workspaceFolder}/tmp/chrome_user_data"]
+        },
+        {
+            // "trace": "verbose", // if debugging fails this can give a hint
+            "name": "Attach to Chrome, with sourcemaps",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "sourceMaps": true,
+            "webRoot": "${webroot}/plugin"
+        }
+    ]
+}
+
