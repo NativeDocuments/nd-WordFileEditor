@@ -183,19 +183,19 @@ NDAPI.app("root", {
         */
         const color=this.colors[(this.counter++)%this.colors.length];
         const style=[
-            '.INS', so, '{',
+            ['.INS', so, '{',
                 'text-decoration-line:underline;',
                 'text-decoration-color:'+color+';',
                 'text-decoration-style:solid;',
                 'color:'+color,
-            '}',
-            '.DEL', so, '{',
+            '}'].join(''),
+            ['.DEL', so, '{',
                 'text-decoration-line:line-through;',
                 'text-decoration-color:'+color+';',
                 'text-decoration-style:solid;',
                 'color:'+color,
-        '}',
-        ].join('');
+            '}'].join('')
+        ];
         return style;
     }.bind({
         counter: 0,
