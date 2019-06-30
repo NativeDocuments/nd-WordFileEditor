@@ -1,38 +1,66 @@
 # nd-WordFileEditor
 
-nd-WordFileEditor is a react/typescript project which allows you to customise Native Documents'
+Use this project to easily get Word File Editor running in your web browser. 
+
+This nd-WordFileEditor project is a react/typescript project which also allows you to customise Native Documents'
 Word File Editor.
 
-Word File Editor is configured/customised by an app.js file which the browser loads on startup.
+## Pre-requisites
 
-So this project provides an app.js file.
+You'll need Node.js, which you can install on Linux, Windows, or macOS.
 
-It also provides a host.js file which can be used to serve WFE in an iframe.  host.html is an example of doing so. 
+You'll also need to git clone this project.
 
-# npm start
+## Conceptual overview / pathways
 
-The project needs a config file containing something like:
+Running this project starts a proxy which forwards all requests to the specified Word File Editor server. 
+
+Where you haven't configured this, it defaults to https://canary.nativedocuments.com.
+
+This means you can easily start playing with the editor, without needing to install a server.
+
+When you are ready to install your own server, you can easily do so using either docker or our AWS CloudFormation template.
+
+## Dev id, secret and license URL
+
+You'll need some credentials.  To get these, please register and log in at https://developers.nativedocuments.com/ 
+
+After registering/logging in, in the middle of the page you will see:  *Request a 3 month eval license for the Word File Editor docker containers*.
+
+Click the "request" link, and you will get a matching pair + license URL.  Save these to a safe place.
+
+You need the dev id and secret to get started, and you will need the license URL later if/when you choose to install your own server.  
+
+## Installation
+
+Just run `npm install`
+
+## Start the local proxy
+
+After npm install, you can start the local proxy with:
+
+```
+npm start -nd-dev-id="${ND_DEV_ID}" -nd-dev-secret="${ND_DEV_SECRET}" 
+```
+
+where **${ND_DEV_ID}** and **${ND_DEV_SECRET}** are the values you got at https://developers.nativedocuments.com/  (see above)
+
+Alternatively, you create a config file in a .ndapi dir in your home directory.  The default file is `~/.ndapi/config` (Linux) or `C:\Users\[USERNAME]\.ndapi` (Windows), for example:
 
 ```json
 {
-  "service_url": "https://YOUR.HOST.com",
   "dev_id": "7BDVM9ZZZAIMAUI487AB49QUQS",
-  "dev_secret": "14D70ZZNG00ER5PS8661VDF9BH",
-  "api_ver": "DEV"
+  "dev_secret": "14D70ZZNG00ER5PS8661VDF9BH"
 }
 ```
 
-dev_id and dev_secret you get from https://developers.nativedocuments.com/ 
+With that, you can just type:
 
-service_url points at your Word File Editor server (ie if on-prem, your WFE docker containers). This needs to be a URL accessible via https, or 127.0.0.1 (if you are running the docker containers on your local dev machine)
+```
+npm start 
+```
 
-The code looks for a config file in a .ndapi dir in your home directory.
-
-The default file is `~/.ndapi/config` (Linux) or `C:\Users\[USERNAME]\.ndapi` (Windows)
-
-# npm start --nd-user=jason
-
-You can define a named profile.  For example, a profile named 'jason' would be defined in a 
+You can also define a named profile.  For example, a profile named 'jason' would be defined in a 
 profile named config.jason (in the .ndapi dir).
 
 To start the project using that profile:
@@ -41,150 +69,85 @@ To start the project using that profile:
 npm start --nd-user=jason
 ```
 
-Having started it, you should see something like:
+## Loading a Word document
+
+Once you have npm started the local proxy, you can visit http://127.0.0.1:8888 in your browser. 
+
+That'll allow you load a document interactively to view it.
+
+But to edit, you need to provide an author token.  To get this, upload a file:
 
 ```
-> sample-plugin@0.1.0 start /bvols/@git/repos/nd-public-WordFileEditor
-> webpack-dev-server --config webpack.development.js --no-inline --watch
-
-[ND] Loading config from "/home/jason/.ndapi/config.jason". Use --nd-user to override the user.
-ℹ ｢wds｣: Project is running at http://127.0.0.1:8080/webpack-dev-server/
-ℹ ｢wds｣: webpack output is served from /
-ℹ ｢atl｣: Using typescript@3.2.2 from typescript
-ℹ ｢atl｣: Using tsconfig.json from /bvols/@git/repos/nd-public-WordFileEditor/tsconfig.json
-ℹ ｢atl｣: Checking started in a separate process...
-ℹ ｢atl｣: Time: 2830ms
-ℹ ｢wdm｣: Hash: 002e74dd6e9f8db4359e
-Version: webpack 4.20.2
-Time: 4765ms
-Built at: 2019-03-29 21:22:03
-      Asset      Size  Chunks             Chunk Names
-     app.js  54.1 KiB     app  [emitted]  app
-    host.js   6.6 KiB    host  [emitted]  host
- app.js.map  75.3 KiB     app  [emitted]  app
-host.js.map  9.61 KiB    host  [emitted]  host
-Entrypoint app = app.js app.js.map
-Entrypoint host = host.js host.js.map
-[./host/host.ts] 2.82 KiB {host} [built]
-[./node_modules/timers-browserify/main.js] 1.85 KiB {app} [built]
-[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 895 bytes {app} [built]
-[./src/app.js] 6.37 KiB {app} [built]
-[./src/ui/CustomPostIt.tsx] 2.59 KiB {app} [built]
-[./src/ui/RootDialog.tsx] 1.74 KiB {app} [built]
-[./src/ui/SearchDialog.tsx] 7.37 KiB {app} [built]
-[./src/ui/WordCommentPostIt.tsx] 3.24 KiB {app} [built]
-[./src/ui/ZoomDialog.tsx] 3.16 KiB {app} [built]
-[./src/ui/zoomIn.svg] 1.14 KiB {app} [built]
-[./src/ui/zoomOut.svg] 981 bytes {app} [built]
-[./src/ui/zoomWidth.svg] 2.44 KiB {app} [built]
-[@babel/polyfill] external "window.ndapi.exports.babel.polyfill" 42 bytes {app} [built]
-[NDAPI] external "window.ndapi" 42 bytes {app} [built]
-[react] external "window.ndapi.exports.React" 42 bytes {app} [built]
-    + 2 hidden modules
-ℹ ｢wdm｣: Compiled successfully.
+curl -X POST -H "X-ND-DEV-SECRET: ${ND_DEV_SECRET}" --data-binary @'sample.docx' ${ND_SERVICE_URL}/v1/DEV${ND_DEV_ID}00000000000000000000000000000000000000000000000000000000/upload 
 ```
+where **${ND_SERVICE_URL}** is http://127.0.0.1:8888.  (If/when you run your own server, you'll use its address instead)
 
-npm start runs a web server serving app.js at http://127.0.0.1:8080/app.js and host/host.html
+(On Windows, use curl.exe; you might need to install it first)
 
-The easiest thing to do first is to visit http://127.0.0.1:8080/host/host.html
-
-There you can drag/drop a docx and see it in the editor in view mode in an iframe.  If you look
-at the iframe's @source, you will see something like:
+The response will be something like:
 
 ```
-src="https://YOUR.HOST.com/editService/aHR0cDovLzEyNy4wLjAuMTo4MDgwL2FwcC5qcw?nid=DEV7BDVM9ZZZAIMAUI487AB49QUQS000000000000000000000000000362KC0GG2BQ8EI4BKAADDJRSU0000"
+{"nid":"5597GAP8E2C5KVA04GH4N9CD36PM7000000000000000000000000000300EQOGG20ICUI4B2JD62EHC60000",
+"author":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTmF0aXZlIERvY3VtZW50cyIsIm5pY2tuYW1lIjoibmQifQ.w5bgaJk3L3KzF71ESpKkStcGAaBXAYcmCFCmw5VRhWQ",
+"rid":"H2"}
 ```
 
-You can open that editService URL in your web browser.  (notice it adds DEVB to the path)
+Notice the nid value (hereinafter **${NID}**) and author value **${AUTHOR_TOKEN}**
 
-You can add &author=TODO to the URL to make it editable.
-            
-Notes: 
-
-1.  generally you need to have POSTed the Word document (represented by the nid) to the server (we avoided that here by drag/dropping the document instead), and
-1.  aHR0cDovLzEyNy4wLjAuMTo4MDgwL2FwcC5qcw is the base64 encoded URL pointing at where your app.js is running (in this case http://127.0.0.1:8080/app.js).   
-
-# Packaging/release
-
-To create an app.js which you can deploy to a server somewhere, execute:
+To edit your document, you just open the following URL:
 
 ```
-npm install
-npm run build --nd-user=[PROFILE NAME]
+http://127.0.0.1:8888/edit/${NID}?author=${AUTHOR_TOKEN}
 ```
 
-This will create a dir dist containing:
+## Editing features
+
+The editor includes the following basic functionality:
+
+- change tracking (redlining of deletions and insertions)
+- multi-level undo/redo (Ctrl-Z and Ctrl-Y on Windows)
+- copy/paste
+- find
+- zoom in/zoom out
+- navigation hotkeys (cursor keys, PgUp/PgDown, Home/End, Ctrl-Left, Ctrl-Right)
+
+together with advanced features around annotations/comments.
+
+## Exporting your document
+
+Your changes are continuously saved as you type.
+
+To get the current document at any time in Word format: 
 
 ```
-app.js  app.js.map  host.js  host.js.map
+curl -o out.docx -X GET -H "X-ND-DEV-SECRET: ${ND_DEV_SECRET}" "${ND_SERVICE_URL}/v1/DEV${ND_DEV_ID}00000000000000000000000000000000000000000000000000000000/document/${NID}/?format=application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 ```
 
-If you want to use host.js,  you'll find host.html in the host dir (its a static file).
+Notice the format parameter.  Other values for that:
 
-If you deploy app.js, remember you need to use you need its base64 encoded location in your editService URL.
+- save as PDF
+- save as plain text
+- save as rich text (JSON format)
 
-# Verifying your release
-
-You can quickly verify a release build using `serve`
-1. Make sure you have `serve` (https://www.npmjs.com/package/serve) installed: 
-   ```
-   npm install serve  
-   ```
-   or globally:
-   ```
-   npm install -g serve  
-   ```
-2. goto the `dist` directory and run serve on port 8080:
-   ```
-   dist> serve -p 8080
-   ```
-3. try the build using:
-   https://YOUR.HOST.com/DEVB/editService/aHR0cDovLzEyNy4wLjAuMTo4MDgwL2FwcC5qcw?nid={NID}&author={AUTHOR}
-
-Alternatively, the client will attempt to load a default app.js from the WFE server at /DEV/custom/app.js, so you can put it there and use a URL which is just /DEVB/?nid=...  for example:
+To get pdf:
 
 ```
-https://YOUR.HOST.com/DEVB/?nid=DEV7BDVM9BGGAIMAUI487AB49QUQS000000000000000000000000000362KC0GG2AA8EI48AABEFSH2N0000&author=TODO
+curl -o out.pdf -X GET -H "X-ND-DEV-SECRET: ${ND_DEV_SECRET}" ${ND_SERVICE_URL}/v1/DEV${ND_DEV_ID}00000000000000000000000000000000000000000000000000000000/document/${NID}/?format=application/pdf 
 ```
 
-# Debugging
-
-For serious development work we recommend you launch the editor in Chrome from vs Code.
-
-You need a recent version of vs Code for this to work (for example, 1.31.1 or 1.32.1)
-
-Start vs Code. 
-
-Install the Chrome debugger if you don't have it already (Debug>Install Additional Debuggers..) then in the 
-extensions marketplace, select "Debugger for Chrome" (v4.11.3 at the time of writing).
-
-If necessary, specify the path to your Chrome executable using runtimeExecutable in .vscode/launch.json
-
-launch.json is also where you specify the URL you want to see in Chrome.  For example:
+To get plain text (useful for NLP):
 
 ```
-            "url": "https://YOUR.HOST.com/editService/aHR0cDovLzEyNy4wLjAuMTo4MDgwL2FwcC5qcw?nid=DEV7BDVM9ZZZAIMAUI487AB49QUQS000000000000000000000000000362KC0GG2AA8EI48AABEFSH2N0000&author=TODO",
+curl -o out.txt -X GET -H "X-ND-DEV-SECRET: ${ND_DEV_SECRET}" "${ND_SERVICE_URL}/v1/DEV${ND_DEV_ID}00000000000000000000000000000000000000000000000000000000/document/${NID}/?format=application/vnd.nativedocuments.raw.text%2Btext"
 ```
 
-or
+To get rich text (JSON):
+
 ```
-            "url": "http://127.0.0.1:8080/host/host.html",
+curl -o out.json -X GET -H "X-ND-DEV-SECRET: ${ND_DEV_SECRET}" "${ND_SERVICE_URL}/v1/DEV${ND_DEV_ID}00000000000000000000000000000000000000000000000000000000/document/${NID}/?format=application/vnd.nativedocuments.raw.json%2Bjson"
 ```
 
-(In the above ${config:nd.dev.key} reads its value from settings.json)            
+## Recommended next steps
 
-Then press F5 or Debug > Start Debugging.  Be sure that the local webserver is running (npm start), otherwise Chrome will say "Error: Failed to load http://127.0.0.1:8080/app.js"
-
-To stop debugging (be sure to do this before starting another debug session), simply close the Chrome Window.
-
-# Editing requires that the Cache API is available
-
-Editing makes use of the browser's Cache API
-
-The cache API is only available in a secure context https://w3c.github.io/webappsec-secure-contexts ie HTTPS or 127.0.0.1
-
-Without this, editing can not be enabled, and we fallback back to the viewer. 
-
-For development purposes, you can start Chrome with `--disable-web-security` 
-
-If you are using vs Code for debugging, you can configure that in launch.json.
+- Install and use your own server (Docker containers)
+- Integrate our editor into your application
