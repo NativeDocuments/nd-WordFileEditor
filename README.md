@@ -149,5 +149,5 @@ curl -o out.json -X GET -H "X-ND-DEV-SECRET: ${ND_DEV_SECRET}" "${ND_SERVICE_URL
 
 ## Recommended next steps
 
-- Install and use your own server [see our Docker instructions](/NativeDocuments/nd-WordFileEditor/wiki/Docker)  or use our AWS CloudFormation template.
+- Install and use your own server ([see our Docker instructions](/NativeDocuments/nd-WordFileEditor/wiki/Docker))  or use our AWS CloudFormation template.
 - Integrate our editor into your application
