@@ -49,8 +49,8 @@ Alternatively, you create a config file in a .ndapi dir in your home directory. 
 
 ```json
 {
-  "dev_id": "7BDVM9ZZZAIMAUI487AB49QUQS",
-  "dev_secret": "14D70ZZNG00ER5PS8661VDF9BH"
+  "dev_id": "YOUR DEV ID GOES HERE",
+  "dev_secret": "YOUR DEV SECRET GOES HERE"
 }
 ```
 
