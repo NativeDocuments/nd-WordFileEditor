@@ -19,7 +19,7 @@ Where you haven't configured this, it defaults to https://canary.nativedocuments
 
 This means you can easily start playing with the editor, without needing to install a server.
 
-When you are ready to install your own server, you can easily do so using either docker ([see our Docker instructions](/NativeDocuments/nd-WordFileEditor/wiki/Docker))  or our AWS CloudFormation template.
+When you are ready to install your own server, you can easily do so using either docker ([see our Docker instructions](https://github.com///NativeDocuments/nd-WordFileEditor/wiki/Docker))  or our AWS CloudFormation template.
 
 ## Dev id, secret and license URL
 
@@ -149,5 +149,5 @@ curl -o out.json -X GET -H "X-ND-DEV-SECRET: ${ND_DEV_SECRET}" "${ND_SERVICE_URL
 
 ## Recommended next steps
 
-- Install and use your own server ([see our Docker instructions](/NativeDocuments/nd-WordFileEditor/wiki/Docker))  or use our AWS CloudFormation template.
+- Install and use your own server ([[see our Docker instructions|Docker]])  or use our AWS CloudFormation template.
 - Integrate our editor into your application
