@@ -99,6 +99,7 @@ To edit your document, you just open the following URL:
 ```
 http://127.0.0.1:8888/edit/${NID}?author=${AUTHOR_TOKEN}
 ```
+Tip: as an alternative to manually editing this command, click a variable at https://nativedocuments.com/ai.html#postThenEdit to generate a ready-to-execute command.
 
 ## Editing features
 
@@ -128,6 +129,9 @@ Notice the format parameter.  Other values for that:
 - save as PDF
 - save as plain text
 - save as rich text (JSON format)
+
+Tip: again, as an alternative to manually editing the commands shown here, click a variable at https://nativedocuments.com/ai.html#exporting to generate a ready-to-execute command.
+
 
 To get pdf:
 
